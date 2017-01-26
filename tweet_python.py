@@ -13,8 +13,8 @@ from os import getenv
 from time import sleep
 from random import randrange
 #from flask import Flask, render_template, request
-from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.triggers.interval import IntervalTrigger
+#from apscheduler.schedulers.background import BackgroundScheduler
+#from apscheduler.triggers.interval import IntervalTrigger
 
 c_key = getenv("TWITTER_CONS_KEY","")
 c_secret = getenv("TWITTER_CONS_SCRT","")
@@ -28,13 +28,14 @@ twitter_api = twitter.Api(consumer_key=c_key,
                   access_token_secret=a_secret)
 
 def tweetMe():
-	global count, scheduler
+	global count
 	count = count + 1
-	r = randrange(300)
+	#r = randrange(300)
 	dt = str(datetime.now())[:-6].replace(' ', ' - ').replace('.', '') #YYYY-mm-DD - HH:MM:SS
 	msg  = dt + " | " +  "It's tweet o' clock! #" +  str(count)
 	status = twitter_api.PostUpdate(msg)
 	print(status.text)
+	"""
 	scheduler.add_job(
 		func=tweetMe,
 		trigger=IntervalTrigger(seconds=(180 + r)),
@@ -44,11 +45,12 @@ def tweetMe():
 
 scheduler = BackgroundScheduler()
 scheduler.start	
+"""
 
-tweetMe()
 while True:
-	#print ("sleeping for 30 seconds")
-	sleep(30)
+	
+	tweetMe()
+	sleep(180 + randrange(300))
    
 """	   
 #
