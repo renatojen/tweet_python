@@ -1,6 +1,6 @@
 """
 * 
-* TweetEx.py
+* tweet_python.py
 * Author:
 * Renato Jensen Filho
 * 2017-01-25
@@ -48,7 +48,6 @@ scheduler.start
 """
 
 while True:
-	
 	tweetMe()
 	sleep(180 + randrange(300))
    
